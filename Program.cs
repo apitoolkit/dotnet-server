@@ -51,21 +51,6 @@ app.MapGet("/error-tracking", async context =>
   await context.Response.WriteAsync($"Hello, {context.Request.RouteValues["name"]}!");
 });
 
-app.MapPost("/post-request", async context =>
-{
-  // Enable buffering to read the request body multiple times
-  context.Request.EnableBuffering();
-
-  // Read the request body
-  using (var reader = new StreamReader(context.Request.Body, leaveOpen: true))
-  {
-    string requestBody = await reader.ReadToEndAsync();
-    context.Request.Body.Position = 0; // Reset the stream position for further processing
-
-    // Return the request body as the response
-    await context.Response.WriteAsync($"Request Body: {requestBody}");
-  }
-});
 
 app.Run();
 
