@@ -9,6 +9,7 @@ var app = builder.Build();
 var config = new Config
 {
   Debug = true,
+  ServiceName = "MyService",
 };
 var client = APIToolkit.NewClient(config);
 
@@ -43,12 +44,7 @@ app.MapGet("/", async (context) =>
 
 app.MapGet("/error-tracking", async context =>
 {
-  // Attempt to open a non-existing file (just an example)
-  using (var fileStream = System.IO.File.OpenRead("nonexistingfile.txt"))
-  {
-    // File opened successfully, do something if needed
-  }
-  await context.Response.WriteAsync($"Hello, {context.Request.RouteValues["name"]}!");
+  await context.Response.WriteAsync("Hello, world!");
 });
 
 
